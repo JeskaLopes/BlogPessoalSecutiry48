@@ -15,26 +15,41 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name="tb_usuarios")
+@Table(name = "tb_usuarios")
 public class Usuario {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String nome;
-	
+
 	@Email
 	private String usuario;
-	
+
 	@NotNull
 	private String senha;
-	
+
 	private String foto;
-	
-	@OneToMany(mappedBy="usuario", cascade = CascadeType.REMOVE)
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagens;
+
+	// Metodos construtores para testes
+	//importante seguir a mesma ordem das declarações dos atributos de usuario acima 
+	//construtor cheio
+	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+	}
+	
+	//construtor vazio
+	public Usuario() {}
+	
 
 	public Long getId() {
 		return id;
@@ -74,7 +89,8 @@ public class Usuario {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
-	} 
+	}
+
 	public List<Postagem> getPostagens() {
 		return postagens;
 	}
@@ -82,5 +98,5 @@ public class Usuario {
 	public void setPostagens(List<Postagem> postagens) {
 		this.postagens = postagens;
 	}
-	
+
 }
