@@ -26,5 +26,4 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		
 		return usuario.map(UserDetailsImpl::new).get();
 	}
-
 }
